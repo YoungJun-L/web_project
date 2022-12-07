@@ -1,0 +1,152 @@
+body {
+    background: #161618;
+    color: #fff;
+    width: 100%;
+    font-size: 14px;
+    font-family: Axiforma,Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    word-break: keep-all;
+    vertical-align: baseline;
+    line-height: 1;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a.post:not(:last-child)::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    content: "";
+    width: 100%;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.562);
+}
+
+a.post:hover {
+    color: #9999a3;
+}
+
+.content {
+    width: 1000px;
+    padding: 15px 15px 0;
+    border-radius: 20px;
+    background: #2f2f32;
+}
+
+.community_name {
+    height: 30px;
+    line-height: 30px;
+    font-size: 110%;
+    text-align: center;
+    border-radius: 20px;
+    background: linear-gradient(240deg,#5b05ea,#0242d0);
+}
+
+.post_list {
+    margin-top: 10px;
+}
+
+.post {
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.post_title {
+    padding: 5px 120px 0 0;
+    margin-bottom: 5px;
+    font-size: 130%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info_list {
+    position: absolute;
+    right: 0;
+    transform: translateY(50%);
+}
+
+.info {
+    display: inline-block;
+}
+
+.hit {
+
+}
+
+.good {
+
+}
+
+.time {
+
+}
+
+.button {
+    width: 48px;
+    height: 48px;
+    margin: 10px;
+    border: 3px solid transparent;
+    line-height: 48px;
+    text-align: center;
+    border-radius: 24px;
+    background: linear-gradient(#161618, #161618), linear-gradient(240deg,#5b05ea,#0242d0);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+.sort_button {
+    width: 48px;
+    height: 48px;
+    margin: 10px 15px;
+    line-height: 48px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+
+.page_button {
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+
+.on {
+    color: #2f5ec5;
+}
+
+#container {
+    margin: 0 auto;
+    width: 1400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#sort_menu {
+    display: flex;
+    width: 1000px;
+    justify-content: center;
+}
+
+#page {
+    display: flex;
+    width: 1000px;
+    justify-content: center;
+}
+
+#nav {
+    display: flex;
+    position: fixed;
+    top: 10px;
+    right: 50px;
+    z-index: 999;
+}
