@@ -1,3 +1,9 @@
 db_env.py
-server
-!server/src
+server/node_modules
+.env.db_env.eslintignore
+.env.dev
+.eslintignore
+.eslintrc
+.prettierrc
+nodemon.json
+!/server/src
