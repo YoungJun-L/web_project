@@ -318,7 +318,7 @@
 
         function link(e) {
             page = $(e).text();
-            window.location.href = `list.html?sort=${params.get("sort")}&page=${page}`;
+            window.location.href = `list?sort=${params.get("sort")}&page=${page}`;
         }
 
         function endLoader() {

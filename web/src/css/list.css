@@ -10,6 +10,7 @@ body {
 }
 
 a {
+    cursor: pointer;
     text-decoration: none;
     color: #fff;
 }
@@ -29,6 +30,7 @@ a.post:hover {
 
 .content {
     width: 1000px;
+    height: 612px;
     padding: 15px 15px 0;
     border-radius: 20px;
     background: #2f2f32;
@@ -56,6 +58,7 @@ a.post:hover {
 .post_title {
     padding: 5px 120px 0 0;
     margin-bottom: 5px;
+    width: 750px;
     font-size: 130%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -73,15 +76,19 @@ a.post:hover {
 }
 
 .hit {
-
+    text-align: right;
+    font-style: italic;    
 }
 
 .good {
-
+    width: 70px;
+    text-align: center;
+    color: rgb(255, 120, 120);
 }
 
 .time {
-
+    width: 70px;
+    text-align: right;
 }
 
 .button {
@@ -98,7 +105,7 @@ a.post:hover {
 }
 
 .sort_button {
-    width: 48px;
+    width: auto;
     height: 48px;
     margin: 10px 15px;
     line-height: 48px;
@@ -149,4 +156,25 @@ a.post:hover {
     top: 10px;
     right: 50px;
     z-index: 999;
+}
+
+.loader {
+    width: 150px;
+    height: 150px;
+    margin: 180px auto;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #2f5ec5;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
