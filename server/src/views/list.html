@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>SCRAPER</title>
+    <meta name="description" content="전체 게시글 확인">
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body {
+            background: #161618;
+            color: #fff;
+            width: 100%;
+            font-size: 14px;
+            font-family: Axiforma,Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+            word-break: keep-all;
+            vertical-align: baseline;
+            line-height: 1;
+        }
+        
+        a {
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        a.post:not(:last-child)::after {
+            position: absolute;
+            display: block;
+            bottom: 0;
+            content: "";
+            width: 100%;
+            border-bottom: 1px solid rgba(179, 179, 179, 0.562);
+        }
+        
+        a.post:hover {
+            color: #9999a3;
+        }
+        
+        .content {
+            width: 1000px;
+            height: 612px;
+            padding: 15px 15px 0;
+            border-radius: 20px;
+            background: #2f2f32;
+        }
+        
+        .community_name {
+            height: 30px;
+            line-height: 30px;
+            font-size: 110%;
+            text-align: center;
+            border-radius: 20px;
+            background: linear-gradient(240deg,#5b05ea,#0242d0);
+        }
+        
+        .post_list {
+            margin-top: 10px;
+        }
+        
+        .post {
+            position: relative;
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .post_title {
+            padding: 5px 120px 0 0;
+            margin-bottom: 5px;
+            width: 750px;
+            font-size: 130%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .info_list {
+            position: absolute;
+            right: 0;
+            transform: translateY(50%);
+        }
+        
+        .info {
+            display: inline-block;
+        }
+        
+        .hit {
+            text-align: right;
+            font-style: italic;    
+        }
+        
+        .good {
+            width: 70px;
+            text-align: center;
+            color: rgb(255, 120, 120);
+        }
+        
+        .time {
+            width: 70px;
+            text-align: right;
+        }
+        
+        .button {
+            width: 48px;
+            height: 48px;
+            margin: 10px;
+            border: 3px solid transparent;
+            line-height: 48px;
+            text-align: center;
+            border-radius: 24px;
+            background: linear-gradient(#161618, #161618), linear-gradient(240deg,#5b05ea,#0242d0);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+        
+        .sort_button {
+            width: auto;
+            height: 48px;
+            margin: 10px 15px;
+            line-height: 48px;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .page_button {
+            width: 24px;
+            height: 24px;
+            margin: 5px;
+            line-height: 24px;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .on {
+            color: #2f5ec5;
+        }
+        
+        #container {
+            margin: 0 auto;
+            width: 1400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        
+        #sort_menu {
+            display: flex;
+            width: 1000px;
+            justify-content: center;
+        }
+        
+        #page {
+            display: flex;
+            width: 1000px;
+            justify-content: center;
+        }
+        
+        #nav {
+            display: flex;
+            position: fixed;
+            top: 10px;
+            right: 50px;
+            z-index: 999;
+        }
+        
+        .loader {
+            width: 150px;
+            height: 150px;
+            margin: 180px auto;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #2f5ec5;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var url = new URL(document.location.href);
+        var params = url.searchParams;
+
+        var page = 1;
+        if (params.get("page") !== null) {
+            page = params.get("page");
+        }
+
+        var sort = "timeUpdate";
+        if (params.get("sort") !== null) {
+            sort = params.get("sort");
+        }
+        var totalData = null;
+
+        $(document).ready(() => {
+            $.ajax({
+                method: "GET",
+                url: `http://localhost:3000/all?page=${page}&sort=${sort}`,
+                dataType: "json",
+                success: (data) => {
+                    totalData = data;
+                    display();
+                    endLoader();
+                },
+            });
+            paging();
+        });
+
+        function display() {
+            var appendhtml = "";
+            for (var i = 0; i < 15; i++) {
+                var newDate = formatTime(new Date(totalData[i].timeUpdate));
+                appendhtml += `
+                <a class="post" href="${totalData[i].url}" target="blank">
+                <span class="post_title">${totalData[i].title}</span>
+                <span class="info_list">
+                <ul>
+                <li class="info hit">${totalData[i].viewNum} view</li>
+                <li class="info good">${totalData[i].voteNum}</li>
+                <li class="info time">${newDate}</li>
+                </ul>
+                </span>
+                </a>
+                `;
+            }
+            $(".post_list").html(appendhtml);
+        }
+
+        function formatTime(date) {
+            var now = new Date();
+            var utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+            var KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+
+            var kr = new Date(utc + KR_TIME_DIFF);
+            var newDate = "";
+            if (kr.getMonth() !== date.getMonth()) {
+                newDate = "1달전";
+            } else if (kr.getDate() === date.getDate()) {
+                if (kr.getHours() === date.getHours()) {
+                    newDate = `${kr.getMinutes() - date.getMinutes()}분전`;
+                } else {
+                    newDate = `${kr.getHours() - date.getHours()}시간전`;
+                }
+            } else {
+                newDate = `${kr.getDate() - date.getDate()}일전`;
+            }
+            return newDate;
+        }
+
+        function paging() {
+            $("#page a")
+                .eq(page - 1)
+                .attr("class", "page_button on");
+
+            var order = 0;
+            if (sort === "vote") {
+                order = 1;
+            } else if (sort === "reply") {
+                order = 2;
+            }
+
+            $("#sort_menu a").eq(order).attr("class", "sort_button on");
+        }
+
+        function link(e) {
+            page = $(e).text();
+            window.location.href = `list.html?sort=${params.get("sort")}&page=${page}`;
+        }
+
+        function endLoader() {
+            var loader = $("div.loader");
+            loader.css("display", "none");
+        }
+
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div class="content">
+            <div class="community_name">전체 게시글</div>
+            <div class="post_list">
+                <div class="loader"></div>
+            </div>
+        </div>
+        <div id="sort_menu">
+            <a class="sort_button" href="?sort=time">최신순</a>
+            <a class="sort_button" href="?sort=vote">인기순</a>
+            <a class="sort_button" href="?sort=reply">댓글순</a>
+        </div>
+        <div id="page">
+            <a class="page_button" onclick="link(this);">1</a>
+            <a class="page_button" onclick="link(this);">2</a>
+            <a class="page_button" onclick="link(this);">3</a>
+            <a class="page_button" onclick="link(this);">4</a>
+            <a class="page_button" onclick="link(this);">5</a>
+            <a class="page_button" onclick="link(this);">6</a>
+            <a class="page_button" onclick="link(this);">7</a>
+            <a class="page_button" onclick="link(this);">8</a>
+            <a class="page_button" onclick="link(this);">9</a>
+            <a class="page_button" onclick="link(this);">10</a>
+        </div>
+    </div>
+    <div id="nav">
+        <a class="button", href="/">메인</a>
+    </div>
+</body>
+</html>

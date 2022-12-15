@@ -1,0 +1,143 @@
+body {
+    background: #161618;
+    color: #fff;
+    width: 100%;
+    font-size: 14px;
+    font-family: Axiforma,Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    word-break: keep-all;
+    vertical-align: baseline;
+    line-height: 1;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+a.post:not(:last-child)::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    content: "";
+    width: 100%;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.562);
+}
+
+a.post:hover {
+    color: #9999a3;
+}
+
+.content {
+    margin: 10px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    background: #2f2f32;
+}
+
+.community_name {
+    height: 30px;
+    line-height: 30px;
+    font-size: 110%;
+    text-align: center;
+    border-radius: 20px;
+    background: linear-gradient(240deg,#5b05ea,#0242d0);
+}
+
+.post_list {
+    margin-top: 7px;
+}
+
+.post {
+    position: relative;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.post_title {
+    padding: 5px 120px 0 0;
+    margin-bottom: 5px;
+    font-size: 130%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info_list {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+}
+
+.info {
+    display: inline-block;
+}
+
+.good {
+    color: rgb(255, 120, 120);
+}
+
+.time {
+    width: 45px;
+    text-align: right;
+}
+
+.button {
+    width: 48px;
+    height: 48px;
+    margin: 10px;
+    border: 3px solid transparent;
+    line-height: 48px;
+    text-align: center;
+    border-radius: 24px;
+    background: linear-gradient(#161618, #161618), linear-gradient(240deg,#5b05ea,#0242d0);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+
+#container {
+    margin: 0 auto;
+    width: 1400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#content_wrap {
+    display: grid;
+    grid-template: 
+        "a b" 400px
+        "c d" 400px / 700px 700px;
+    float: left;
+}
+
+#nav {
+    display: flex;
+    position: fixed;
+    top: 10px;
+    right: 50px;
+    z-index: 999;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    margin: 130px auto;
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #2f5ec5;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
